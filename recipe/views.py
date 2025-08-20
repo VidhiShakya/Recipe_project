@@ -1,4 +1,9 @@
 from django.db.models import Q
+from django.shortcuts import render, redirect
+from django.core.files.base import ContentFile
+import requests
+from .models import Recipe
+
 def browse_recipes(request):
     query = request.GET.get('q', '')
     if query:
@@ -8,8 +13,6 @@ def browse_recipes(request):
     return render(request, 'browse_recipes.html', {'recipes': recipes})
 
 from django.shortcuts import render
-from django.shortcuts import render, redirect
-from .models import Recipe
 from django.core.files.storage import FileSystemStorage
 
 def home(request):
@@ -30,8 +33,6 @@ def add_recipe(request):
             if image:
                 recipe = Recipe(name=name, description=description, image=image)
             elif image_url:
-                from django.core.files.base import ContentFile
-                import requests
                 try:
                     response = requests.get(image_url)
                     if response.status_code == 200:
@@ -42,5 +43,5 @@ def add_recipe(request):
                     pass
             if recipe:
                 recipe.save()
-                return redirect('browse_recipes')
+                return redirect('recipe_list')
     return render(request, 'add_recipe.html')
