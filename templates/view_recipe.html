@@ -50,13 +50,13 @@
         <div class="bg-orange-200 rounded-2xl inline-flex w-full shadow-xl overflow-hidden">
             <!-- Recipe Image -->
             {% if recipe.image %}
-            <div class="w-auto h-[320px]">
+            <div class="w-[30%] h-[320px]">
                 <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="w-full h-full object-cover">
             </div>
             {% endif %}
 
             <!-- Recipe Details -->
-            <div class="p-8">
+            <div class="p-8 w-[70%]">
                 <h1 class="text-4xl font-serif-display font-bold mb-6 text-terracotta">{{ recipe.name }}</h1>
                 
                 <!-- Recipe Description -->

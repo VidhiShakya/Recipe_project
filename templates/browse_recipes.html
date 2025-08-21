@@ -52,7 +52,7 @@
             </form>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for recipe in recipes %}
-                <div class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[340px] flex flex-col">
+                <div class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[380px] flex flex-col">
                     <!-- Image Container: Fixed height -->
                     <div class="h-[60%] w-full">
                         {% if recipe.image %}
@@ -74,7 +74,7 @@
                             <button class="like-btn text-burnt-orange text-xl focus:outline-none">
                                 <i class="far fa-heart"></i>
                             </button>
-                            <a href="{% url 'view_recipe' recipe.id %}" class="bg-terracotta hover:bg-burnt-orange text-blue-600 px-4 py-2 rounded-full text-sm transition-colors duration-200">
+                            <a href="{% url 'view_recipe' recipe.id %}" class="bg-terracotta hover:bg-burnt-orange text-white px-4 py-2 rounded-full text-sm transition-colors duration-200">
                                 View Recipe
                             </a>
                         </div>

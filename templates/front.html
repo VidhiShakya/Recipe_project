@@ -40,6 +40,17 @@
 </head>
 <body class="font-sans-inter text-warm-brown">
 
+    <!-- Navigation Bar -->
+    <nav class="w-full bg-terracotta text-white py-4 px-8 flex justify-between items-center fixed top-0 left-0 z-20 shadow-lg">
+        <div class="text-2xl font-serif-display font-bold tracking-wide" style="color: var(--honey-gold);">Golden Spoon</div>
+        <div class="flex space-x-8 uppercase font-medium">
+            <a href="{% url 'recipe_list' %}" class="hover:text-honey-gold transition-colors duration-200">Home</a>
+            <a href="{% url 'browse_recipes' %}" class="hover:text-honey-gold transition-colors duration-200">Browse</a>
+            <a href="{% url 'add_recipe' %}" class="hover:text-honey-gold transition-colors duration-200">Add Recipe</a>
+            <a href="#about-section" class="hover:text-honey-gold transition-colors duration-200">About</a>
+            <a href="{% url 'contact' %}" class="hover:text-honey-gold transition-colors duration-200">Contact</a>
+        </div>
+    </nav>
     <!-- Hero Section -->
     <header class="relative w-full h-[600px] flex items-center justify-center text-center overflow-hidden rounded-b-3xl shadow-lg">
         <!-- Background Image with Overlay -->
@@ -65,7 +76,7 @@
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif-display font-bold text-center mb-12" style="color: var(--burnt-orange);">Featured Recipes</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for recipe in recipes %}
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[420px] flex flex-col hover:shadow-2xl transition-shadow duration-300">
+                <div class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[420px] flex flex-col hover:shadow-2xl transition-shadow duration-300">
                     <!-- Image Container: Fixed height -->
                     <div class="h-48 w-full">
                         {% if recipe.image %}
@@ -100,7 +111,7 @@
         </section>
         
         <!-- About Us & Community Spotlight Section -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        <section id="about-section" class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
             
             <!-- About Us Section -->
             <div class="bg-soft-blush rounded-2xl p-8 sm:p-12 shadow-inner">
@@ -159,20 +170,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-white py-12 px-8 rounded-t-3xl shadow-lg" style="background-color: var(--terracotta);">
-        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <!-- Social Icons -->
-            <div class="flex justify-center space-x-6">
-                <a href="#" class="text-2xl hover:text-honey-gold transition-colors duration-200"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-2xl hover:text-honey-gold transition-colors duration-200"><i class="fab fa-pinterest"></i></a>
-                <a href="#" class="text-2xl hover:text-honey-gold transition-colors duration-200"><i class="fab fa-facebook-f"></i></a>
-            </div>
-            <!-- Navigation Links -->
-            <div class="flex space-x-6 uppercase font-medium mb-6 sm:mb-0">
-                <a href="#" class="hover:text-honey-gold transition-colors duration-200">About</a>
-                <a href="#" class="hover:text-honey-gold transition-colors duration-200">Browse</a>
-                <a href="#" class="hover:text-honey-gold transition-colors duration-200">Contact</a>
-            </div>
+    <footer class="text-white py-8 px-8 rounded-t-3xl shadow-lg" style="background-color: var(--terracotta);">
+        <div class="container mx-auto text-center">
+            <span class="text-lg font-serif-display">&copy; 2025 Golden Spoon. All rights reserved.</span><br>
+            <span class="block mt-2 text-base font-serif-display">Made with love and flavour.</span>
+            <span class="block mt-1 text-base font-serif-display">Where good food meets good company.</span>
         </div>
     </footer>
 

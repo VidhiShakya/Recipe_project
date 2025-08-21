@@ -92,3 +92,9 @@ def browse_recipes(request):
         print(f"Image path: {recipe.image.path if recipe.image else 'No image'}")
         
     return render(request, 'browse_recipes.html', {'recipes': recipes})
+
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')
