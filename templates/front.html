@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
     <!-- Google Fonts for typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -17,6 +20,7 @@
         .font-serif-display {
             font-family: 'Playfair Display', serif;
         }
+
         .font-sans-inter {
             font-family: 'Inter', sans-serif;
         }
@@ -38,11 +42,14 @@
         }
     </style>
 </head>
+
 <body class="font-sans-inter text-warm-brown">
 
     <!-- Navigation Bar -->
-    <nav class="w-full bg-terracotta text-white py-4 px-8 flex justify-between items-center fixed top-0 left-0 z-20 shadow-lg">
-        <div class="text-2xl font-serif-display font-bold tracking-wide" style="color: var(--honey-gold);">Golden Spoon</div>
+    <nav
+        class="w-full bg-terracotta text-white py-4 px-8 flex justify-between items-center fixed top-0 left-0 z-20 shadow-lg">
+        <div class="text-2xl font-serif-display font-bold tracking-wide" style="color: var(--honey-gold);">Golden Spoon
+        </div>
         <div class="flex space-x-8 uppercase font-medium">
             <a href="{% url 'recipe_list' %}" class="hover:text-honey-gold transition-colors duration-200">Home</a>
             <a href="{% url 'browse_recipes' %}" class="hover:text-honey-gold transition-colors duration-200">Browse</a>
@@ -52,19 +59,28 @@
         </div>
     </nav>
     <!-- Hero Section -->
-    <header class="relative w-full h-[600px] flex items-center justify-center text-center overflow-hidden rounded-b-3xl shadow-lg">
+    <header
+        class="relative w-full h-[600px] flex items-center justify-center text-center overflow-hidden rounded-b-3xl shadow-lg">
         <!-- Background Image with Overlay -->
-        <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('https://media-cldnry.s-nbcnews.com/image/upload/t_today-inline-large,f_auto,q_auto:best/newscms/2015_48/872671/ski-lodge-kitchen-zillow-today-151124.jpg');">
+        <div class="absolute inset-0 z-0 bg-cover bg-center"
+            style="background-image: url('https://media-cldnry.s-nbcnews.com/image/upload/t_today-inline-large,f_auto,q_auto:best/newscms/2015_48/872671/ski-lodge-kitchen-zillow-today-151124.jpg');">
             <div class="absolute inset-0 bg-black opacity-40"></div>
         </div>
 
         <!-- Hero Content -->
         <div class="relative z-10 px-6 py-12 text-white">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-bold mb-4" style="color: var(--honey-gold);">Gather at Golden Hour</h1>
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-8 tracking-wide leading-relaxed">Share your favorite recipes and connect with a community that loves to cook</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-bold mb-4"
+                style="color: var(--honey-gold);">Gather at Golden Hour</h1>
+            <p
+                class="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-8 tracking-wide leading-relaxed">
+                Share your favorite recipes and connect with a community that loves to cook</p>
             <div class="flex flex-col items-center gap-4">
-                <a href="/browse/" class="border-2 border-terracotta text-terracotta bg-transparent hover:bg-terracotta hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Browse Recipes</a>
-                <a href="/add/" class="border-2 border-burnt-orange text-burnt-orange bg-transparent hover:bg-burnt-orange hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Add Recipe</a>
+                <a href="/browse/"
+                    class="border-2 border-terracotta text-terracotta bg-transparent hover:bg-terracotta hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Browse
+                    Recipes</a>
+                <a href="/add/"
+                    class="border-2 border-burnt-orange text-burnt-orange bg-transparent hover:bg-burnt-orange hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Add
+                    Recipe</a>
             </div>
         </div>
     </header>
@@ -73,10 +89,12 @@
 
         <!-- Featured Recipes Section -->
         <section class="mb-16">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif-display font-bold text-center mb-12" style="color: var(--burnt-orange);">Featured Recipes</h2>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif-display font-bold text-center mb-12"
+                style="color: var(--burnt-orange);">Featured Recipes</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for recipe in recipes %}
-                <div class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[420px] flex flex-col hover:shadow-2xl transition-shadow duration-300">
+                <div
+                    class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[420px] flex flex-col hover:shadow-2xl transition-shadow duration-300">
                     <!-- Image Container: Fixed height -->
                     <div class="h-48 w-full">
                         {% if recipe.image %}
@@ -87,84 +105,68 @@
                         </div>
                         {% endif %}
                     </div>
-                    
+
                     <!-- Content Container -->
                     <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-xl font-serif-display font-semibold mb-2 text-terracotta truncate">{{ recipe.name }}</h3>
+                        <h3 class="text-xl font-serif-display font-semibold mb-2 text-terracotta truncate">{{
+                            recipe.name }}</h3>
                         <p class="text-gray-700 text-sm line-clamp-3 mb-4">{{ recipe.description }}</p>
-                        
+
                         <!-- Button Container: Push to bottom -->
                         <div class="mt-auto flex justify-between items-center">
                             <button class="like-btn text-burnt-orange text-xl focus:outline-none">
                                 <i class="far fa-heart"></i>
                             </button>
-                            <a href="{% url 'view_recipe' recipe.id %}" class="bg-terracotta hover:bg-burnt-orange text-white px-4 py-2 rounded-full text-sm transition-colors duration-200">
+                            <a href="{% url 'view_recipe' recipe.id %}"
+                                class="bg-terracotta hover:bg-burnt-orange text-white px-4 py-2 rounded-full text-sm transition-colors duration-200">
                                 View Recipe
                             </a>
                         </div>
                     </div>
                 </div>
                 {% empty %}
-                <p class="col-span-3 text-center text-lg text-gray-500">No recipes added yet. Be the first to <a href="/add/" class="text-burnt-orange underline">add one</a>!</p>
+                <p class="col-span-3 text-center text-lg text-gray-500">No recipes added yet. Be the first to <a
+                        href="/add/" class="text-burnt-orange underline">add one</a>!</p>
                 {% endfor %}
             </div>
         </section>
-        
+
         <!-- About Us & Community Spotlight Section -->
-        <section id="about-section" class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-            
+        <section id="about-section" class=" gap-12 items-center mb-16">
+
             <!-- About Us Section -->
             <div class="bg-soft-blush rounded-2xl p-8 sm:p-12 shadow-inner">
-                <h2 class="text-3xl sm:text-4xl font-serif-display font-bold mb-4" style="color: var(--terracotta);">About Us</h2>
+                <h2 class="text-3xl sm:text-4xl font-serif-display font-bold mb-4" style="color: var(--terracotta);">
+                    About Us</h2>
                 <div class="flex items-start gap-6">
                     <!-- Kitchen Illustration SVG -->
-                    <svg class="flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 opacity-70" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 5 L10 25 L10 85 L90 85 L90 25 Z" fill="none" stroke="var(--terracotta)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M25 85 L25 55 M75 85 L75 55" fill="none" stroke="var(--terracotta)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <rect x="25" y="55" width="50" height="30" fill="none" stroke="var(--terracotta)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="50" cy="55" r="5" fill="var(--terracotta)"/>
-                        <path d="M50 85 L50 95 M40 95 L60 95" fill="none" stroke="var(--terracotta)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg class="flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 opacity-70" viewBox="0 0 100 100"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 5 L10 25 L10 85 L90 85 L90 25 Z" fill="none" stroke="var(--terracotta)"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M25 85 L25 55 M75 85 L75 55" fill="none" stroke="var(--terracotta)" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <rect x="25" y="55" width="50" height="30" fill="none" stroke="var(--terracotta)"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="50" cy="55" r="5" fill="var(--terracotta)" />
+                        <path d="M50 85 L50 95 M40 95 L60 95" fill="none" stroke="var(--terracotta)" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <div>
-                        <p class="text-base sm:text-lg leading-relaxed font-light italic mb-4" style="color: var(--warm-brown);">
-                            Golden Spoon was born from a simple belief: that the best recipes are the ones filled with memories. This isn't just a database of ingredients; it's a space to share the stories behind the food.
+                        <p class="text-base sm:text-lg leading-relaxed font-light italic mb-4"
+                            style="color: var(--warm-brown);">
+                            Golden Spoon was born from a simple belief: that the best recipes are the ones filled with
+                            memories. This isn't just a database of ingredients; it's a space to share the stories
+                            behind the food.
                         </p>
                         <p class="text-base sm:text-lg leading-relaxed font-light" style="color: var(--warm-brown);">
-                            From your grandmother's secret stew to the pasta dish you perfected on a lazy Sunday, every recipe has a soul. We've built this community for home cooks who find joy in the process and connection in the sharing.
+                            From your grandmother's secret stew to the pasta dish you perfected on a lazy Sunday, every
+                            recipe has a soul. We've built this community for home cooks who find joy in the process and
+                            connection in the sharing.
                         </p>
                     </div>
                 </div>
             </div>
-
-            <!-- Community Spotlight Section -->
-            <div class="p-8 sm:p-12">
-                <h2 class="text-3xl sm:text-4xl font-serif-display font-bold text-center mb-8" style="color: var(--terracotta);">Community Spotlight</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-                    
-                    <!-- Contributor 1 -->
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/100x100/C06145/F5D6C6?text=User" alt="Profile photo of a top contributor." class="w-20 h-20 rounded-full mb-3 shadow-md border-2 border-white">
-                        <h3 class="font-semibold text-lg" style="color: var(--warm-brown);">Maria R.</h3>
-                        <p class="text-sm italic text-gray-600">"My Grandma's Focaccia"</p>
-                    </div>
-
-                    <!-- Contributor 2 -->
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/100x100/6A4A3C/F5D6C6?text=User" alt="Profile photo of a top contributor." class="w-20 h-20 rounded-full mb-3 shadow-md border-2 border-white">
-                        <h3 class="font-semibold text-lg" style="color: var(--warm-brown);">Alex K.</h3>
-                        <p class="text-sm italic text-gray-600">"Spicy Lentil Curry"</p>
-                    </div>
-
-                    <!-- Contributor 3 -->
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/100x100/E55B13/F5D6C6?text=User" alt="Profile photo of a top contributor." class="w-20 h-20 rounded-full mb-3 shadow-md border-2 border-white">
-                        <h3 class="font-semibold text-lg" style="color: var(--warm-brown);">Sam C.</h3>
-                        <p class="text-sm italic text-gray-600">"Honey-Glazed Salmon"</p>
-                    </div>
-
-                </div>
-            </div>
-
         </section>
 
     </main>
@@ -180,7 +182,7 @@
 
     <script>
         document.querySelectorAll('.like-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const icon = this.querySelector('i');
                 icon.classList.toggle('far');
                 icon.classList.toggle('fas');
@@ -190,4 +192,5 @@
         });
     </script>
 </body>
+
 </html>
