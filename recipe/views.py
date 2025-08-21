@@ -10,6 +10,9 @@ def home(request):
 
 def recipe_list(request):
     recipes = Recipe.objects.all().order_by('-id')
+    print('DEBUG: Recipes passed to template:')
+    for r in recipes:
+        print(f'ID: {r.id}, Name: {r.name}, Description: {r.description}')
     return render(request, 'front.html', {'recipes': recipes})
 
 def add_recipe(request):
