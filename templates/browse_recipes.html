@@ -44,21 +44,41 @@
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
-        <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+        <div class="bg-orange-100 rounded-2xl shadow-xl p-6 sm:p-8">
             <!-- Search bar -->
             <form method="get" class="flex justify-center mb-8">
                 <input type="text" name="q" placeholder="Search recipes..." value="{{ request.GET.q }}" class="border border-terracotta rounded-l px-4 py-2 w-1/2 focus:outline-none">
-                <button type="submit" class="border border-terracotta bg-terracotta text-white px-4 py-2 rounded-r hover:bg-burnt-orange"><i class="fas fa-search"></i></button>
+                <button type="submit" class="border border-terracotta bg-terracotta text-black px-4 py-2 rounded-r hover:bg-burnt-orange"><i class="fas fa-search"></i></button>
             </form>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for recipe in recipes %}
-                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
-                    {% if recipe.image %}
-                    <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="w-full h-48 object-cover rounded-t-2xl mb-4">
-                    {% endif %}
-                    <h2 class="text-xl font-semibold mb-2 text-terracotta">{{ recipe.name }}</h2>
-                    <p class="text-gray-700 mb-4">{{ recipe.description }}</p>
-                    <button class="like-btn text-burnt-orange text-2xl focus:outline-none"><i class="far fa-heart"></i></button>
+                <div class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[340px] flex flex-col">
+                    <!-- Image Container: Fixed height -->
+                    <div class="h-[60%] w-full">
+                        {% if recipe.image %}
+                        <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                        <div class="w-full h-full bg-soft-blush flex items-center justify-center">
+                            <span class="text-terracotta">No image available</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Content Container -->
+                    <div class="p-4 flex flex-col flex-grow">
+                        <h2 class="text-xl font-serif-display font-semibold mb-2 text-terracotta truncate">{{ recipe.name }}</h2>
+                        <p class="text-gray-700 text-sm line-clamp-3 mb-4">{{ recipe.description }}</p>
+                        
+                        <!-- Button Container: Push to bottom -->
+                        <div class="mt-auto flex justify-between items-center">
+                            <button class="like-btn text-burnt-orange text-xl focus:outline-none">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <a href="{% url 'view_recipe' recipe.id %}" class="bg-terracotta hover:bg-burnt-orange text-blue-600 px-4 py-2 rounded-full text-sm transition-colors duration-200">
+                                View Recipe
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 {% empty %}
                 <p class="col-span-3 text-center text-lg text-gray-500">No recipes found.</p>
