@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-11u9=my8wx&@4h$*e5xfj23w*8b%!(+r$45wcovuv5yttc+&3=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'recipe.urls'
+ROOT_URLCONF = 'Recipe_project.urls'
 
 TEMPLATES = [
     {
@@ -62,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
