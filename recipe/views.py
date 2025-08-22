@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
 from .models import Recipe
+from .forms import CustomUserCreationForm
 
 def logout_view(request):
     logout(request)
@@ -89,17 +90,20 @@ def add_recipe(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('profile')
+        else:
+            # Print form errors for debugging
+            print(f"Form errors: {form.errors}")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
 
-@login_required
+@login_required(login_url='login')
 def profile(request):
     user = request.user
     recipes = user.recipes.all().order_by('-id')
