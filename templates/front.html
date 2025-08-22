@@ -45,25 +45,15 @@
 
 <body class="font-sans-inter text-warm-brown">
 
-    <!-- Navigation Bar -->
-    <nav
-        class="w-full bg-terracotta text-white py-4 px-8 flex justify-between items-center fixed top-0 left-0 z-20 shadow-lg">
-        <div class="text-2xl font-serif-display font-bold tracking-wide" style="color: var(--honey-gold);">Golden Spoon
-        </div>
-        <div class="flex space-x-8 uppercase font-medium">
-            <a href="{% url 'recipe_list' %}" class="hover:text-honey-gold transition-colors duration-200">Home</a>
-            <a href="{% url 'browse_recipes' %}" class="hover:text-honey-gold transition-colors duration-200">Browse</a>
-            <a href="{% url 'add_recipe' %}" class="hover:text-honey-gold transition-colors duration-200">Add Recipe</a>
-            <a href="#about-section" class="hover:text-honey-gold transition-colors duration-200">About</a>
-            <a href="{% url 'contact' %}" class="hover:text-honey-gold transition-colors duration-200">Contact</a>
-        </div>
-    </nav>
+    {% include 'header.html' %}
     <!-- Hero Section -->
     <header
         class="relative w-full h-[600px] flex items-center justify-center text-center overflow-hidden rounded-b-3xl shadow-lg">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0 bg-cover bg-center"
-            style="background-image: url('/media/bgimp.webp');">
+
+            style="background-image: url('bgimg.jpeg');">
+
             <div class="absolute inset-0 bg-black opacity-40"></div>
         </div>
 
@@ -92,6 +82,7 @@
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif-display font-bold text-center mb-12"
                 style="color: var(--burnt-orange);">Featured Recipes</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cards  -->
                 {% for recipe in recipes %}
                 <div
                     class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[420px] flex flex-col hover:shadow-2xl transition-shadow duration-300">

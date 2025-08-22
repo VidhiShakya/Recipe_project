@@ -2,7 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.core.files.base import ContentFile
 import requests
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, logout
 from .models import Recipe
+
+def logout_view(request):
+    logout(request)
+    return redirect('recipe_list')
 
 def home(request):
     recipes = Recipe.objects.all().order_by('-id')
@@ -15,6 +22,7 @@ def recipe_list(request):
         print(f'ID: {r.id}, Name: {r.name}, Description: {r.description}')
     return render(request, 'front.html', {'recipes': recipes})
 
+@login_required
 def add_recipe(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -60,8 +68,10 @@ def add_recipe(request):
                 except (requests.exceptions.RequestException, ValueError) as e:
                     print(f"Error downloading image from URL: {e}")
             
-            # Now, save the recipe instance to the database once.
+            # Assign owner and save the recipe instance to the database once.
             # This will save the recipe and the image (if any) correctly.
+            if request.user.is_authenticated:
+                recipe.owner = request.user
             recipe.save()
             
             # Debug information after save
@@ -75,6 +85,25 @@ def add_recipe(request):
             return redirect('browse_recipes')
 
     return render(request, 'add_recipe.html')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('profile')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+@login_required
+def profile(request):
+    user = request.user
+    recipes = user.recipes.all().order_by('-id')
+    return render(request, 'profile.html', {'profile_user': user, 'recipes': recipes})
 
 def view_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)

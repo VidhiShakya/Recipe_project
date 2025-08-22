@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import recipe_list, add_recipe, browse_recipes, view_recipe, about, contact
+from .views import recipe_list, add_recipe, browse_recipes, view_recipe, about, contact, profile, signup
 
 urlpatterns = [
     path('', recipe_list, name='recipe_list'),
@@ -8,4 +8,6 @@ urlpatterns = [
     path('recipe/<int:recipe_id>/', view_recipe, name='view_recipe'),
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
+    path('profile/', profile, name='profile'),
+    path('signup/', signup, name='signup'),
 ]
