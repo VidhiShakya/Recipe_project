@@ -45,35 +45,45 @@
 
 <body class="font-sans-inter text-warm-brown">
 
-    <!-- Hero Section with Floating Nav -->
-    <div class="relative">
-        {% include 'header.html' %}
-        <header
-            class="relative w-full h-[600px] flex items-center justify-center text-center overflow-hidden shadow-lg rounded-bl-[20px] rounded-br-[20px]">
-            <!-- Background Image with Overlay -->
-            <div class="absolute inset-0 z-0 bg-cover bg-center rounded-bl-[25px] rounded-br-[25px]"
-                style="background-image: url('/media/bgimp.webp');">
-                <div class="absolute inset-0 bg-black opacity-40 rounded-bl-[25px] rounded-br-[25px]"></div>
-            </div>
+    <!-- Navigation Bar -->
+    <nav
+        class="w-full bg-terracotta text-white py-4 px-8 flex justify-between items-center fixed top-0 left-0 z-20 shadow-lg">
+        <div class="text-2xl font-serif-display font-bold tracking-wide" style="color: var(--honey-gold);">Golden Spoon
+        </div>
+        <div class="flex space-x-8 uppercase font-medium">
+            <a href="{% url 'recipe_list' %}" class="hover:text-honey-gold transition-colors duration-200">Home</a>
+            <a href="{% url 'browse_recipes' %}" class="hover:text-honey-gold transition-colors duration-200">Browse</a>
+            <a href="{% url 'add_recipe' %}" class="hover:text-honey-gold transition-colors duration-200">Add Recipe</a>
+            <a href="#about-section" class="hover:text-honey-gold transition-colors duration-200">About</a>
+            <a href="{% url 'contact' %}" class="hover:text-honey-gold transition-colors duration-200">Contact</a>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header
+        class="relative w-full h-[600px] flex items-center justify-center text-center overflow-hidden rounded-b-3xl shadow-lg">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0 bg-cover bg-center"
+            style="background-image: url('/media/bgimp.webp');">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+        </div>
 
-            <!-- Hero Content -->
-            <div class="relative z-10 px-6 py-12 text-white mt-12">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-bold mb-4"
-                    style="color: var(--honey-gold);">Gather at Golden Hour</h1>
-                <p
-                    class="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-8 tracking-wide leading-relaxed">
-                    Share your favorite recipes and connect with a community that loves to cook</p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="/browse/"
-                        class="border-2 border-terracotta text-white bg-transparent hover:bg-terracotta hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Browse
-                        Recipes</a>
-                    <a href="/add/"
-                        class="border-2 border-burnt-orange text-white bg-transparent hover:bg-burnt-orange hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Add
-                        Recipe</a>
-                </div>
+        <!-- Hero Content -->
+        <div class="relative z-10 px-6 py-12 text-white">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif-display font-bold mb-4"
+                style="color: var(--honey-gold);">Gather at Golden Hour</h1>
+            <p
+                class="text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-3xl mx-auto mb-8 tracking-wide leading-relaxed">
+                Share your favorite recipes and connect with a community that loves to cook</p>
+            <div class="flex flex-col items-center gap-4">
+                <a href="/browse/"
+                    class="border-2 border-terracotta text-terracotta bg-transparent hover:bg-terracotta hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Browse
+                    Recipes</a>
+                <a href="/add/"
+                    class="border-2 border-burnt-orange text-burnt-orange bg-transparent hover:bg-burnt-orange hover:text-white text-lg sm:text-xl font-semibold py-3 px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-center">Add
+                    Recipe</a>
             </div>
-        </header>
-    </div>
+        </div>
+    </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
@@ -82,7 +92,6 @@
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif-display font-bold text-center mb-12"
                 style="color: var(--burnt-orange);">Featured Recipes</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Cards  -->
                 {% for recipe in recipes %}
                 <div
                     class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[420px] flex flex-col hover:shadow-2xl transition-shadow duration-300">
