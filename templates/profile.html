@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset<body>
+  <meta chars  </style>
+</head>
+<body>
   {% include 'header.html' %}
   
   <!-- Announcement Bar -->
   <div class="announcement-bar mt-20">
     ✨ Welcome to {{ profile_user.username }}'s Recipe Collection ✨
-  </div>8">
+  </div>
+
+  <div class="max-w-6xl mx-auto p-6">>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ profile_user.username }} - Profile</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -90,7 +94,7 @@
         {% endif %}
         <div class="p-4">
           <h3 class="text-lg font-semibold text-[var(--dark-gold)]">{{ recipe.name }}</h3>
-          <p class="text-sm text-gray-700 mt-1">{{ recipe.ingredients|truncatewords:10 }}</p>
+          <p class="text-sm text-gray-700 mt-1">{{ recipe.description|truncatewords:10 }}</p>
           <a href="{% url 'view_recipe' recipe.id %}" 
              class="mt-3 inline-block text-sm font-semibold text-[var(--dark-gold)] hover:underline">
             View Full Recipe →
