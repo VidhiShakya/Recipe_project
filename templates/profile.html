@@ -1,59 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Profile - {{ profile_user.username }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      :root {
-        --terracotta: #C06145;
-      }
-      .font-serif-display {
-            font-family: 'Playfair Display', serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - {{ profile_user.username }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --dark-gold: #b86b31;  /* warm dark golden/brownish */
+      --peach: #f8e0d4;      /* soft peach background */
+      --cream: #fff;         /* card white */
+      --text-dark: #4a2c2a;  /* dark brown text */
+    }
 
-        .font-sans-inter {
-            font-family: 'Inter', sans-serif;
-        }
+    body {
+      background: var(--peach);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+    }
 
-        /* Custom color palette from the prompt */
-        :root {
-            --burnt-orange: #E55B13;
-            --soft-blush: #F5D6C6;
-            --honey-gold: #FFC07F;
-            --cream: #F5F5DC;
-            --terracotta: #C06145;
-            --warm-brown: #6A4A3C;
-        }
+    .announcement-bar {
+      background: var(--dark-gold);
+      color: white;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 8px 0;
+      letter-spacing: 0.5px;
+    }
 
-        /* Body background with a subtle linear gradient */
-        body {
-            background: linear-gradient(to bottom, var(--cream), var(--soft-blush));
-            min-height: 100vh;
-        }
-    </style>
+    .main-container {
+      background-color: var(--cream);
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .recipe-card {
+      border: 1px solid #e4c3a0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: var(--cream);
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-gold {
+      background: var(--dark-gold);
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+      background: #a0522d; /* deeper brown */
+    }
+  </style>
 </head>
-<body class="font-sans-inter text-warm-brown min-h-screen">
-    <!-- {% include 'header.html' %} -->
-    <div class="max-w-5xl mx-auto p-6">
-        <div class="bg-white p-6 rounded shadow">
-            <h1 class="text-2xl font-serif-display mb-2">Profile: {{ profile_user.username }}</h1>
-            <p class="text-sm text-gray-600 mb-4">Recipes added: {{ recipes.count }}</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-              {% for recipe in recipes %}
-              <div class="bg-white p-4 rounded shadow">
-                {% if recipe.image %}
-                  <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="w-full h-40 object-cover mb-2">
-                {% endif %}
-                <h3 class="font-semibold text-terracotta">{{ recipe.name }}</h3>
-                <p class="text-sm text-gray-700">{{ recipe.description|truncatewords:20 }}</p>
-                <a href="{% url 'view_recipe' recipe.id %}" class="mt-2 inline-block text-white bg-terracotta px-3 py-1 rounded">View</a>
-              </div>
-              {% empty %}
-              <p>No recipes yet.</p>
-              {% endfor %}
-            </div>
+<body>
+  
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    ✨ Welcome to {{ profile_user.username }}’s Recipe Collection ✨
+  </div>
+
+  <div class="max-w-6xl mx-auto p-6">
+    <div class="main-container p-8">
+      <!-- Header -->
+      <h1 class="text-3xl font-semibold text-center text-[var(--dark-gold)] mb-2">
+        {{ profile_user.username }}'s Profile
+      </h1>
+      <p class="text-center text-sm text-gray-600 mb-6">
+        Recipes added so far: <span class="font-semibold">{{ recipes.count }}</span>
+      </p>
+
+      <!-- Add Recipe Form -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-10">
+        <h2 class="text-xl font-semibold text-[var(--dark-gold)] mb-4">➕ Add a New Recipe</h2>
+        <form method="POST" enctype="multipart/form-data" class="space-y-4">
+          {% csrf_token %}
+          <div>
+            <label class="block text-gray-700 mb-1">Recipe Image:</label>
+            <input type="file" name="image" class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-1">Recipe Name:</label>
+            <input type="text" name="name" class="w-full border rounded px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-1">Ingredients:</label>
+            <textarea name="ingredients" rows="3" class="w-full border rounded px-3 py-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-gray-700 mb-1">Method:</label>
+            <textarea name="method" rows="4" class="w-full border rounded px-3 py-2"></textarea>
+          </div>
+          <button type="submit" class="btn-gold px-5 py-2 rounded-lg shadow-md">
+            Add Recipe
+          </button>
+        </form>
+      </div>
+
+      <!-- Previously Added Recipes -->
+      <h2 class="text-2xl font-semibold text-[var(--dark-gold)] mb-6 text-center">
+        🍽️ Previously Added Recipes
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for recipe in recipes %}
+        <div class="recipe-card shadow">
+          {% if recipe.image %}
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="w-full h-40 object-cover">
+          {% endif %}
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-[var(--dark-gold)]">{{ recipe.name }}</h3>
+            <p class="text-sm text-gray-700 mb-2"><strong>Ingredients:</strong> {{ recipe.ingredients|truncatewords:12 }}</p>
+            <p class="text-sm text-gray-600 mb-3"><strong>Method:</strong> {{ recipe.method|truncatewords:15 }}</p>
+            <a href="{% url 'view_recipe' recipe.id %}" class="btn-gold px-3 py-1 rounded inline-block">
+              View Full Recipe
+            </a>
+          </div>
         </div>
+        {% empty %}
+        <p class="text-gray-700 text-center col-span-3">No recipes added yet.</p>
+        {% endfor %}
+      </div>
     </div>
+  </div>
+
 </body>
 </html>
