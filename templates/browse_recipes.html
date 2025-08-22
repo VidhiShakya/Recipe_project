@@ -55,9 +55,10 @@
             <!-- Cards  -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for recipe in recipes %}
-                <div class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[380px] flex flex-col">
+                <div
+                    class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[420px] flex flex-col hover:shadow-2xl transition-shadow duration-300">
                     <!-- Image Container: Fixed height -->
-                    <div class="h-[60%] w-full">
+                    <div class="h-48 w-full">
                         {% if recipe.image %}
                         <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="w-full h-full object-cover">
                         {% else %}
@@ -66,25 +67,27 @@
                         </div>
                         {% endif %}
                     </div>
-                    
+
                     <!-- Content Container -->
                     <div class="p-4 flex flex-col flex-grow">
-                        <h2 class="text-xl font-serif-display font-semibold mb-2 text-terracotta truncate">{{ recipe.name }}</h2>
+                        <h3 class="text-xl font-serif-display font-semibold mb-2 text-terracotta">{{ recipe.name }}</h3>
                         <p class="text-gray-700 text-sm line-clamp-3 mb-4">{{ recipe.description }}</p>
-                        
+
                         <!-- Button Container: Push to bottom -->
                         <div class="mt-auto flex justify-between items-center">
                             <button class="like-btn text-burnt-orange text-xl focus:outline-none">
                                 <i class="far fa-heart"></i>
                             </button>
-                            <a href="{% url 'view_recipe' recipe.id %}" class="bg-terracotta hover:bg-burnt-orange text-white px-4 py-2 rounded-full text-sm transition-colors duration-200">
+                            <a href="{% url 'view_recipe' recipe.id %}"
+                                class="bg-terracotta hover:bg-burnt-orange text-white px-4 py-2 rounded-full text-sm transition-colors duration-200">
                                 View Recipe
                             </a>
                         </div>
                     </div>
                 </div>
                 {% empty %}
-                <p class="col-span-3 text-center text-lg text-gray-500">No recipes found.</p>
+                <p class="col-span-3 text-center text-lg text-gray-500">No recipes added yet. Be the first to <a
+                        href="/add/" class="text-burnt-orange underline">add one</a>!</p>
                 {% endfor %}
             </div>
         </div>
@@ -92,7 +95,7 @@
 
     <script>
         document.querySelectorAll('.like-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const icon = this.querySelector('i');
                 icon.classList.toggle('far');
                 icon.classList.toggle('fas');
