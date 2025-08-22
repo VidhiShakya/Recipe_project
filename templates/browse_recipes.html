@@ -38,7 +38,8 @@
 </head>
 <body class="font-sans-inter text-warm-brown flex flex-col min-h-screen">
 
-    <!-- Header Section (similar to the landing page, for consistency) -->
+    {% include 'header.html' %}
+    <!-- Header Section (page title) -->
     <header class="w-full py-8 text-center">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif-display font-bold" style="color: var(--burnt-orange);">Browse Recipes</h1>
     </header>
@@ -50,6 +51,8 @@
                 <input type="text" name="q" placeholder="Search recipes..." value="{{ request.GET.q }}" class="border border-terracotta rounded-l px-4 py-2 w-1/2 focus:outline-none">
                 <button type="submit" class="border border-terracotta bg-terracotta text-black px-4 py-2 rounded-r hover:bg-burnt-orange"><i class="fas fa-search"></i></button>
             </form>
+
+            <!-- Cards  -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for recipe in recipes %}
                 <div class="bg-orange-200 rounded-2xl shadow-lg overflow-hidden w-full max-w-sm mx-auto h-[380px] flex flex-col">

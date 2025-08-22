@@ -1,0 +1,25 @@
+{% load static %}
+<nav class="bg-white/80 backdrop-blur sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <div class="flex items-center gap-6">
+        <a href="/" class="text-2xl font-serif-display" style="color:var(--terracotta);">Golden Spoon</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/" class="text-sm font-medium text-[#6A4A3C] hover:text-[#C06145]">Home</a>
+        <a href="/browse/" class="text-sm font-medium text-[#6A4A3C] hover:text-[#C06145]">Browse</a>
+        <a href="/add/" class="text-sm font-medium text-[#6A4A3C] hover:text-[#C06145]">Add Recipe</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}" class="px-4 py-2 rounded-full" style="background:#C06145;color:white;" onmouseover="this.style.background='#E55B13'" onmouseout="this.style.background='#C06145'">Profile</a>
+          <form method="post" action="{% url 'logout' %}" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="text-sm" style="color:#6A4A3C" onmouseover="this.style.color='#C06145'" onmouseout="this.style.color='#6A4A3C'">Logout</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}" class="px-4 py-2 rounded-full border text-sm" style="border-color:#C06145;color:#C06145" onmouseover="this.style.background='#C06145';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#C06145'">Login</a>
+          <a href="{% url 'signup' %}" class="px-4 py-2 rounded-full text-white text-sm" style="background:#C06145;" onmouseover="this.style.background='#E55B13'" onmouseout="this.style.background='#C06145'">Sign up</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
