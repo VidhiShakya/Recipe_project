@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.name }} | Golden Spoon</title>
+    <!-- Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom font classes */
+        .font-serif-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-sans-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom color palette */
+        :root {
+            --burnt-orange: #E55B13;
+            --soft-blush: #F5D6C6;
+            --honey-gold: #FFC07F;
+            --cream: #F5F5DC;
+            --terracotta: #C06145;
+            --warm-brown: #6A4A3C;
+        }
+
+        /* Body background with a subtle linear gradient */
+        body {
+            background: linear-gradient(to bottom, var(--cream), var(--soft-blush));
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="font-sans-inter text-warm-brown">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Back button -->
+        <a href="{% url 'browse_recipes' %}" class="inline-flex items-center mb-8 text-terracotta hover:text-burnt-orange transition-colors duration-200">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Back to Recipes
+        </a>
+
+        <!-- Recipe Content -->
+        <div class="bg-orange-200 rounded-2xl inline-flex w-full shadow-xl overflow-hidden">
+            <!-- Recipe Image -->
+            {% if recipe.image %}
+            <div class="w-[30%] h-[320px]">
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="w-full h-full object-cover">
+            </div>
+            {% endif %}
+
+            <!-- Recipe Details -->
+            <div class="p-8 w-[70%]">
+                <h1 class="text-4xl font-serif-display font-bold mb-6 text-terracotta">{{ recipe.name }}</h1>
+                
+                <!-- Recipe Description -->
+                <div class="prose max-w-none">
+                    <p class="text-lg leading-relaxed text-gray-700">{{ recipe.description }}</p>
+                </div>
+
+                <!-- Actions -->
+                <div class="mt-8 flex items-center justify-between">
+                    <button class="like-btn text-burnt-orange text-2xl focus:outline-none">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <!-- Add more actions here if needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.like-btn').addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            icon.classList.toggle('far');
+            icon.classList.toggle('fas');
+            icon.classList.toggle('text-burnt-orange');
+            icon.classList.toggle('text-red-500');
+        });
+    </script>
+</body>
+</html>
