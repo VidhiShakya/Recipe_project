@@ -71,7 +71,13 @@
                     <!-- Content Container -->
                     <div class="p-4 flex flex-col flex-grow">
                         <h3 class="text-xl font-serif-display font-semibold mb-2 text-terracotta">{{ recipe.name }}</h3>
-                        <p class="text-gray-700 text-sm line-clamp-3 mb-4">{{ recipe.description }}</p>
+                        {% if recipe.owner %}
+                        <p class="text-xs text-gray-500 mb-2 flex items-center">
+                            <i class="fas fa-user-circle mr-1"></i>
+                            By {{ recipe.owner.username }}
+                        </p>
+                        {% endif %}
+                        <p class="text-gray-700 text-sm line-clamp-3 mb-4">{{ recipe.description|truncatewords:15 }}</p>
 
                         <!-- Button Container: Push to bottom -->
                         <div class="mt-auto flex justify-between items-center">
@@ -92,6 +98,15 @@
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="text-white py-8 px-8 rounded-t-3xl shadow-lg" style="background-color: var(--terracotta);">
+        <div class="container mx-auto text-center">
+            <span class="text-lg font-serif-display">&copy; 2025 Golden Spoon. All rights reserved.</span><br>
+            <span class="block mt-2 text-base font-serif-display">Made with love and flavour.</span>
+            <span class="block mt-1 text-base font-serif-display">"Where good food meets good company."</span>
+        </div>
+    </footer>
 
     <script>
         document.querySelectorAll('.like-btn').forEach(btn => {

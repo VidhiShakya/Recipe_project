@@ -5,7 +5,8 @@ import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
-from .models import Recipe
+from django.http import JsonResponse
+from .models import Recipe, SavedRecipe
 from .forms import CustomUserCreationForm
 
 def logout_view(request):
@@ -91,13 +92,22 @@ def add_recipe(request):
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+        print(f"DEBUG: Signup POST data: {request.POST}")
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('profile')
+            print("DEBUG: Form is valid, creating user...")
+            try:
+                user = form.save()
+                print(f"DEBUG: User created: {user.username} with email: {user.email}")
+                login(request, user)
+                print("DEBUG: User logged in, redirecting to profile")
+                return redirect('profile')
+            except Exception as e:
+                print(f"DEBUG: Error creating user: {e}")
+                form.add_error(None, f"An error occurred while creating your account: {e}")
         else:
             # Print form errors for debugging
-            print(f"Form errors: {form.errors}")
+            print(f"DEBUG: Form errors: {form.errors}")
+            print(f"DEBUG: Form non-field errors: {form.non_field_errors()}")
     else:
         form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -107,11 +117,49 @@ def signup(request):
 def profile(request):
     user = request.user
     recipes = user.recipes.all().order_by('-id')
-    return render(request, 'profile.html', {'profile_user': user, 'recipes': recipes})
+    saved_count = SavedRecipe.objects.filter(user=user).count()
+    return render(request, 'profile.html', {
+        'profile_user': user, 
+        'recipes': recipes,
+        'saved_count': saved_count
+    })
 
 def view_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    return render(request, 'view_recipe.html', {'recipe': recipe})
+    is_saved = False
+    if request.user.is_authenticated:
+        is_saved = SavedRecipe.objects.filter(user=request.user, recipe=recipe).exists()
+    
+    context = {
+        'recipe': recipe,
+        'is_saved': is_saved
+    }
+    return render(request, 'view_recipe.html', context)
+
+@login_required
+def save_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    saved_recipe, created = SavedRecipe.objects.get_or_create(user=request.user, recipe=recipe)
+    
+    if created:
+        return JsonResponse({'saved': True, 'message': 'Recipe saved!'})
+    else:
+        return JsonResponse({'saved': False, 'message': 'Recipe already saved'})
+
+@login_required
+def unsave_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    try:
+        saved_recipe = SavedRecipe.objects.get(user=request.user, recipe=recipe)
+        saved_recipe.delete()
+        return JsonResponse({'saved': False, 'message': 'Recipe removed from saved'})
+    except SavedRecipe.DoesNotExist:
+        return JsonResponse({'saved': False, 'message': 'Recipe was not saved'})
+
+@login_required
+def saved_recipes(request):
+    saved_recipes = SavedRecipe.objects.filter(user=request.user).order_by('-saved_at')
+    return render(request, 'saved_recipes.html', {'saved_recipes': saved_recipes})
 
 def browse_recipes(request):
     query = request.GET.get('q', '')

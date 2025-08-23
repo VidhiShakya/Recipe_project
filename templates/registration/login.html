@@ -5,14 +5,31 @@
 	<title>Login</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<style>
+		/* Custom font classes */
+        .font-serif-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-sans-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
 		:root {
-			--terracotta: #C06145;
-			--light-terracotta: #D87B62;
-			--soft-blush: #F5D6C6;
-		}
+            --burnt-orange: #E55B13;
+            --soft-blush: #F5D6C6;
+            --honey-gold: #FFC07F;
+            --cream: #F5F5DC;
+            --terracotta: #C06145;
+            --warm-brown: #6A4A3C;
+        }
+
+        /* Body background with a subtle linear gradient */
+        body {
+            background: linear-gradient(to bottom, var(--cream), var(--soft-blush));
+            min-height: 100vh;
+        }
 	</style>
 </head>
-<body class="font-sans bg-[var(--soft-blush)] min-h-screen">
+<body class="font-sans min-h-screen">
 	{% include 'header.html' %}
 	<div class="min-h-screen flex items-center justify-center pt-20">
 		<div class="w-full max-w-md bg-white rounded-2xl p-8 shadow-lg border border-[var(--soft-blush)]">

@@ -5,15 +5,31 @@
 	<title>Sign Up</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<style>
+                /* Custom font classes */
+        .font-serif-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-sans-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
 		:root {
-			--terracotta: #C06145;
-			--light-terracotta: #D87B62;
-			--soft-blush: #F5D6C6;
-			--cream: #FDF6F0;
-		}
+            --burnt-orange: #E55B13;
+            --soft-blush: #F5D6C6;
+            --honey-gold: #FFC07F;
+            --cream: #F5F5DC;
+            --terracotta: #C06145;
+            --warm-brown: #6A4A3C;
+        }
+
+        /* Body background with a subtle linear gradient */
+        body {
+            background: linear-gradient(to bottom, var(--cream), var(--soft-blush));
+            min-height: 100vh;
+        }
 	</style>
 </head>
-<body class="font-sans bg-[var(--soft-blush)] min-h-screen">
+<body class="font-sans min-h-screen">
 	{% include 'header.html' %}
 	<div class="min-h-screen flex items-center justify-center pt-20">
 		<div class="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-[var(--soft-blush)]">
@@ -46,14 +62,14 @@
 				<!-- Username -->
 				<div>
 					<label class="block text-sm font-medium text-[var(--terracotta)]" for="id_username">Username</label>
-					<input type="text" name="username" id="id_username" class="w-full border border-[var(--soft-blush)] focus:border-[var(--terracotta)] px-3 py-2 rounded mt-1 focus:outline-none focus:ring-1 focus:ring-[var(--light-terracotta)]" required>
+					<input type="text" name="username" id="id_username" value="{{ form.username.value|default:'' }}" class="w-full border border-[var(--soft-blush)] focus:border-[var(--terracotta)] px-3 py-2 rounded mt-1 focus:outline-none focus:ring-1 focus:ring-[var(--light-terracotta)]" required>
 					<p class="text-xs text-gray-500 mt-1">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
 				</div>
 
 				<!-- Email -->
 				<div>
 					<label class="block text-sm font-medium text-[var(--terracotta)]" for="id_email">Email</label>
-					<input type="email" name="email" id="id_email" class="w-full border border-[var(--soft-blush)] focus:border-[var(--terracotta)] px-3 py-2 rounded mt-1 focus:outline-none focus:ring-1 focus:ring-[var(--light-terracotta)]" required>
+					<input type="email" name="email" id="id_email" value="{{ form.email.value|default:'' }}" class="w-full border border-[var(--soft-blush)] focus:border-[var(--terracotta)] px-3 py-2 rounded mt-1 focus:outline-none focus:ring-1 focus:ring-[var(--light-terracotta)]" required>
 				</div>
 
 				<!-- Password -->

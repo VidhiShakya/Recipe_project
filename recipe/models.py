@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 
 class Recipe(models.Model):
     name = models.CharField(max_length=255)
@@ -12,6 +13,18 @@ class Recipe(models.Model):
         on_delete=models.CASCADE,
         related_name='recipes'
     )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+class SavedRecipe(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='saved_recipes')
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='saved_by')
+    saved_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'recipe')  # Prevent duplicate saves
+
+    def __str__(self):
+        return f"{self.user.username} saved {self.recipe.name}"
