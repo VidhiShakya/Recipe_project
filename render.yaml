@@ -3,7 +3,7 @@ services:
     name: golden-spoon-recipe
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn recipe.wsgi:application"
+    startCommand: "gunicorn Recipe_project.wsgi:application"
     envVars:
       - key: SECRET_KEY
         generateValue: true
