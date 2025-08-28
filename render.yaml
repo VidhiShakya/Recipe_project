@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: "./build.sh"
-    startCommand: "gunicorn Recipe_project.wsgi:application"
+    startCommand: "gunicorn wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -14,8 +14,10 @@ services:
         generateValue: true
       - key: DEBUG
         value: False
+      - key: DJANGO_SETTINGS_MODULE
+        value: Recipe_project.settings
       - key: PYTHON_VERSION
-        value: 3.11.4
+        value: 3.13.0
 
 databases:
   - name: recipe-db

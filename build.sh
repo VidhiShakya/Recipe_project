@@ -23,6 +23,6 @@ echo "=== Running Database Migrations ==="
 python manage.py migrate
 
 echo "=== Testing WSGI Import ==="
-python -c "from Recipe_project.wsgi import application; print('WSGI application imported successfully')"
+python -c "from wsgi import application; print('WSGI application imported successfully')"
 
 echo "=== Build Script Completed Successfully ==="

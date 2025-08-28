@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-11u9=my8wx&@4h$*e5xfj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.render.com', 'golden-spoon-recipe.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.render.com', '*.onrender.com']
 
 
 # Application definition
